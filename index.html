@@ -1,37 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>Gacha</title>
+  <meta charset="UTF-8">
+  <title>Gacha Hentong</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    img {
+      margin-top: 20px;
+      width: 200px;
+      height: auto;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+    }
+  </style>
 </head>
 <body>
 
-<button onclick="gacha()">Gacha</button>
-<br><br>
+  <h1>Gacha Hentong</h1>
+  <button onclick="gacha()">Gacha Sekarang</button>
 
-<img id="img" width="200">
+  <div id="result">Klik untuk mulai</div>
+  <img id="gachaImage" src="" alt="" style="display:none;">
 
-<script>
-const items = [
-  { name: "Common", chance: 60, image: "common.png" },
-  { name: "Rare", chance: 30, image: "rare.png" },
-  { name: "Epic", chance: 9, image: "epic.png" },
-  { name: "Legendary", chance: 1, image: "legendary.png" }
-];
+  <script>
+    const items = [
+      {
+        name: "Common",
+        chance: 60,
+        image: "https://i.ibb.co.com/1JvFZL6s/Common.jpg"
+      },
+      {
+        name: "Rare",
+        chance: 30,
+        image: "https://i.ibb.co.com/QW79476/hoshino-blue-archive-drawn-by-nekoratte-sample-06962bf469c5500b6b19f58ed69e3ca8.jpg"
+      },
+      {
+        name: "Epic",
+        chance: 9,
+        image: "https://i.ibb.co.com/pjW8qck7/Epic.jpg"
+      },
+      {
+        name: "Legendary",
+        chance: 1,
+        image: "https://i.ibb.co.com/wrdV20CD/Legendary.jpg"
+      }
+    ];
 
-function gacha() {
-  let random = Math.random() * 100;
-  let cumulative = 0;
+    function gacha() {
+      let random = Math.random() * 100;
+      let cumulative = 0;
 
-  for (let item of items) {
-    cumulative += item.chance;
+      for (let i = 0; i < items.length; i++) {
+        cumulative += items[i].chance;
 
-    if (random < cumulative) {
-      document.getElementById("img").src = item.image;
-      break;
+        if (random < cumulative) {
+          document.getElementById("result").innerText =
+            "Kamu mendapatkan: " + items[i].name;
+
+          const img = document.getElementById("gachaImage");
+          img.src = items[i].image;
+          img.style.display = "block";
+
+          break;
+        }
+      }
     }
-  }
-}
-</script>
+  </script>
 
 </body>
 </html>
